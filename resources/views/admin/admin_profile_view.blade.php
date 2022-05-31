@@ -11,7 +11,7 @@
                     <div class="widget-user-header bg-black" style="background: url('../images/gallery/full/10.jpg') center center;">
                         <h3 class="widget-user-username">Admin Name: {{$adminData->name}}</h3>
 
-                        <a href="" style="float: right;" class="btn btn-rounded btn-success md-5">Edit Profile</a>
+                        <a href="{{ route('admin.profile.edit') }}" style="float: right;" class="btn btn-rounded btn-success md-5">Edit Profile</a>
 
                         <h6 class="widget-user-desc">Admin Email: {{$adminData->email}}</h6>
                     </div>
