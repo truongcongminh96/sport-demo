@@ -9,5 +9,5 @@
             </li>
         </ul>
     </div>
-    &copy; 2020 <a href="#">Psd to Html Expert</a>. All Rights Reserved.
+    &copy; 2022 <a href="#">Nam Nhu Sport</a>. All Rights Reserved.
 </footer>
