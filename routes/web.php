@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -53,3 +54,9 @@ Route::get('/user/profile', [IndexController::class, 'userProfile'])->name('user
 Route::post('/user/profile/store', [IndexController::class, 'userProfileStore'])->name('user.profile.store');
 Route::get('/user/change/password', [IndexController::class, 'userChangePassword'])->name('change.password');
 Route::post('/user/password/update', [IndexController::class, 'userPasswordUpdate'])->name('user.password.update');
+
+// Admin rands All Routes
+Route::prefix('brand')->group(function () {
+    Route::get('/view', [BrandController::class, 'brandView'])->name('all.brand');
+    Route::get('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+});
