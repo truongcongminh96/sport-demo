@@ -37,11 +37,17 @@ Route::post('/admin/profile/edit', [AdminProfileController::class, 'adminProfile
 Route::get('/admin/change/password', [AdminProfileController::class, 'adminChangePassword'])->name('admin.change.password');
 Route::post('/admin/change/password', [AdminProfileController::class, 'adminUpdateChangePassword'])->name('update.change.password');
 
+// User all routes
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $id = \Illuminate\Support\Facades\Auth::user()->id;
+        $user = \App\Models\User::find($id);
+        return view('dashboard', compact('user'));
     })->name('dashboard');
 });
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
+Route::get('/user/profile', [IndexController::class, 'userProfile'])->name('user.profile');
+Route::post('/user/profile/store', [IndexController::class, 'userProfileStore'])->name('user.profile.store');
