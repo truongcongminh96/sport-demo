@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -14,10 +15,6 @@ use App\Http\Controllers\Backend\AdminProfileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::middleware('admin:admin')->group(function () {
     Route::get('admin/login', [AdminController::class, 'loginForm']);
@@ -46,3 +43,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/', [IndexController::class, 'index']);
