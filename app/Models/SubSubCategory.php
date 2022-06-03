@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static latest()
- * @method static findOrFail($id)
- * @method static where(string $string, $category_id)
- * @method static orderBy(string $string, string $string1)
+ * @method static insert(array $array)
+ * @method static findOrFail()
  */
-class SubCategory extends Model
+class SubSubCategory extends Model
 {
     use HasFactory;
 
@@ -22,13 +21,18 @@ class SubCategory extends Model
      */
     protected $fillable = [
         'category_id',
-        'subcategory_name_en',
-        'subcategory_name_vn',
-        'subcategory_slug_en',
-        'subcategory_slug_vn'
+        'subcategory_id',
+        'subsubcategory_name_en',
+        'subsubcategory_name_vn',
+        'subsubcategory_slug_en',
+        'subsubcategory_slug_vn'
     ];
 
     public function category() {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function subcategory() {
+        return $this->belongsTo(SubCategory::class, 'subcategory_id', 'id');
     }
 }

@@ -34,10 +34,12 @@
                                                 @endforeach
                                             </select>
 
+
                                             @error('category_id')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <h5>SubCategory Name English  <span class="text-danger">*</span></h5>
