@@ -30,7 +30,7 @@
                                             <select name="category_id" class="form-control">
                                                 <option value="" selected="" disabled="">Select Category</option>
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->category_name_en }}</option>
+                                                    <option value="{{ $category->id }}" {{ $category->id == $subCategory->category_id ? 'selected' : '' }}>{{ $category->category_name_en }}</option>
                                                 @endforeach
                                             </select>
 
