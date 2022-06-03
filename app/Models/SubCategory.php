@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static latest()
- * @method static insert(array $array)
  * @method static findOrFail($id)
- * @method static orderBy()
  */
-class Category extends Model
+class SubCategory extends Model
 {
     use HasFactory;
 
@@ -21,10 +19,14 @@ class Category extends Model
      * @var string[]
      */
     protected $fillable = [
-        'category_name_en',
-        'category_name_vn',
-        'category_slug_en',
-        'category_slug_vn',
-        'category_icon',
+        'category_id',
+        'subcategory_name_en',
+        'subcategory_name_vn',
+        'subcategory_slug_en',
+        'subcategory_slug_vn'
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }
