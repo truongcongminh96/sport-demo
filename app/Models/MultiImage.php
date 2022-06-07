@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static insert(array $array)
+ * @method static where()
+ * @method static findOrFail()
  */
 class MultiImage extends Model
 {
