@@ -32,10 +32,10 @@ return new class extends Migration {
             $table->string('product_color_vn')->nullable();
             $table->string('selling_price');
             $table->string('discount_price')->nullable();
-            $table->string('short_description_en');
-            $table->string('short_description_vn');
-            $table->string('long_description_en');
-            $table->string('long_description_vn');
+            $table->text('short_description_en');
+            $table->text('short_description_vn');
+            $table->text('long_description_en');
+            $table->text('long_description_vn');
             $table->string('product_thumbnail');
             $table->integer('hot_deals')->nullable();
             $table->integer('featured')->nullable();

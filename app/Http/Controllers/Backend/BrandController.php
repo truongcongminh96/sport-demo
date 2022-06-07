@@ -35,7 +35,7 @@ class BrandController extends Controller
             'brand_name_en' => $request->brand_name_en,
             'brand_name_vn' => $request->brand_name_vn,
             'brand_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
-            'brand_slug_vn' => strtolower(str_replace(' ', '-', $request->brand_name_vn)),
+            'brand_slug_vn' => str_replace(' ', '-',$request->brand_name_vn),
             'brand_image'   => $save_url,
         ]);
 
@@ -67,8 +67,8 @@ class BrandController extends Controller
                 'brand_name_en' => $request->brand_name_en,
                 'brand_name_vn' => $request->brand_name_vn,
                 'brand_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
-                'brand_slug_vn' => strtolower(str_replace(' ', '-', $request->brand_name_vn)),
-                'brand_image'   => $save_url,
+                'brand_slug_vn' => str_replace(' ', '-',$request->brand_name_vn),
+                'brand_image'   => $save_url
             ]);
 
             $notification = array(
@@ -82,7 +82,7 @@ class BrandController extends Controller
                 'brand_name_en' => $request->brand_name_en,
                 'brand_name_vn' => $request->brand_name_vn,
                 'brand_slug_en' => strtolower(str_replace(' ', '-', $request->brand_name_en)),
-                'brand_slug_vn' => strtolower(str_replace(' ', '-', $request->brand_name_vn))
+                'brand_slug_vn' => str_replace(' ', '-',$request->brand_name_vn)
             ]);
 
             $notification = array(

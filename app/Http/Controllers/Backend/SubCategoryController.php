@@ -35,7 +35,7 @@ class SubCategoryController extends Controller
             'subcategory_name_en' => $request->subcategory_name_en,
             'subcategory_name_vn' => $request->subcategory_name_vn,
             'subcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subcategory_name_en)),
-            'subcategory_slug_vn' => strtolower(str_replace(' ', '-', $request->subcategory_name_vn)),
+            'subcategory_slug_vn' => str_replace(' ', '-',$request->subcategory_name_vn),
 
         ]);
 
@@ -63,7 +63,7 @@ class SubCategoryController extends Controller
             'subcategory_name_en' => $request->subcategory_name_en,
             'subcategory_name_vn' => $request->subcategory_name_vn,
             'subcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subcategory_name_en)),
-            'subcategory_slug_vn' => strtolower(str_replace(' ', '-', $request->subcategory_name_vn))
+            'subcategory_slug_vn' => str_replace(' ', '-',$request->subcategory_name_vn),
         ]);
 
         $notification = array(
@@ -128,7 +128,7 @@ class SubCategoryController extends Controller
             'subsubcategory_name_en' => $request->subsubcategory_name_en,
             'subsubcategory_name_vn' => $request->subsubcategory_name_vn,
             'subsubcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subsubcategory_name_en)),
-            'subsubcategory_slug_vn' => strtolower(str_replace(' ', '-', $request->subsubcategory_name_vn))
+            'subsubcategory_slug_vn' => str_replace(' ', '-',$request->subsubcategory_name_vn)
         ]);
 
         $notification = array(
@@ -157,7 +157,7 @@ class SubCategoryController extends Controller
             'subsubcategory_name_en' => $request->subsubcategory_name_en,
             'subsubcategory_name_vn' => $request->subsubcategory_name_vn,
             'subsubcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subsubcategory_name_en)),
-            'subsubcategory_slug_vn' => strtolower(str_replace(' ', '-', $request->subsubcategory_name_vn))
+            'subsubcategory_slug_vn' => str_replace(' ', '-',$request->subsubcategory_name_vn),
         ]);
 
         $notification = array(

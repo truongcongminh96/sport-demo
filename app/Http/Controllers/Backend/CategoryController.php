@@ -29,7 +29,7 @@ class CategoryController extends Controller
             'category_name_en' => $request->category_name_en,
             'category_name_vn' => $request->category_name_vn,
             'category_slug_en' => strtolower(str_replace(' ', '-', $request->category_name_en)),
-            'category_slug_vn' => strtolower(str_replace(' ', '-', $request->category_name_vn)),
+            'category_slug_vn' => str_replace(' ', '-',$request->category_name_vn),
             'category_icon' => $request->category_icon,
         ]);
 
@@ -55,7 +55,7 @@ class CategoryController extends Controller
             'category_name_en' => $request->category_name_en,
             'category_name_vn' => $request->category_name_vn,
             'category_slug_en' => strtolower(str_replace(' ', '-', $request->category_name_en)),
-            'category_slug_vn' => strtolower(str_replace(' ', '-', $request->category_name_vn)),
+            'category_slug_vn' => str_replace(' ', '-',$request->category_name_vn),
             'category_icon' => $request->category_icon
         ]);
 
