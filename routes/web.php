@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -119,3 +120,8 @@ Route::prefix('slider')->group(function () {
     Route::get('/inactive/{id}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
     Route::get('/active/{id}', [SliderController::class, 'sliderActive'])->name('slider.active');
 });
+
+/////////// Frontend All Routes /////////////
+/////////// Multi Language All Routes //////////
+Route::get('/english/language', [LanguageController::class, 'english'])->name('english.language');
+Route::get('/vietnam/language', [LanguageController::class, 'vietnam'])->name('vietnam.language');
