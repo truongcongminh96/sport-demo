@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MultiImage;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\User;
@@ -78,5 +79,11 @@ class IndexController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function productDetails($id, $slug) {
+        $product = Product::findOrFail($id);
+        $multiImage = MultiImage::where('product_id', $id)->get();
+        return view('frontend.product.product_details', compact('product', 'multiImage'));
     }
 }

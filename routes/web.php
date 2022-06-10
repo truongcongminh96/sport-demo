@@ -125,3 +125,6 @@ Route::prefix('slider')->group(function () {
 /////////// Multi Language All Routes //////////
 Route::get('/english/language', [LanguageController::class, 'english'])->name('english.language');
 Route::get('/vietnam/language', [LanguageController::class, 'vietnam'])->name('vietnam.language');
+
+/////////// Product Detail Page Url //////////
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
