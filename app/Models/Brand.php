@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static latest()
  * @method static insert(array $array)
  * @method static findOrFail()
+ * @method static skip(int $int)
  */
 class Brand extends Model
 {

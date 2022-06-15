@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static insert(array $array)
  * @method static findOrFail($id)
  * @method static orderBy()
+ * @method static skip(int $int)
  */
 class Category extends Model
 {
