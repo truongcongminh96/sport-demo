@@ -166,7 +166,7 @@
                                                     <h5>Product Tags EN<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_en" class="form-control"
-                                                               value="Ling,Victor,Yonex" data-role="tagsinput" required=""></div>
+                                                               value="Lining,Victor,Yonex" data-role="tagsinput" required=""></div>
 
                                                     @error('product_tags_en')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -183,7 +183,7 @@
                                                     <h5>Product Tags VN<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_vn" class="form-control"
-                                                               value="Ling,Victor,Yonex" data-role="tagsinput" required=""></div>
+                                                               value="Lining,Victor,Yonex" data-role="tagsinput" required=""></div>
 
                                                     @error('product_tags_vn')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -196,7 +196,7 @@
                                                     <h5>Product Size EN<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_size_en" class="form-control"
-                                                               value="Ling,Victor,Yonex" data-role="tagsinput" required=""></div>
+                                                               value="Lining,Victor,Yonex" data-role="tagsinput" required=""></div>
 
                                                     @error('product_size_en')
                                                     <span class="text-danger">{{ $message }}</span>
@@ -209,7 +209,7 @@
                                                     <h5>Product Size VN<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_size_vn" class="form-control"
-                                                               value="Ling,Victor,Yonex" data-role="tagsinput" required=""></div>
+                                                               value="Lining,Victor,Yonex" data-role="tagsinput" required=""></div>
 
                                                     @error('product_size_vn')
                                                     <span class="text-danger">{{ $message }}</span>
