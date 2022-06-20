@@ -184,9 +184,11 @@
 
                                                         @foreach($subCategories as $subCategory)
                                                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                                <h2 class="title">
-                                                                    @if(session()->get('language') == 'vietnam'){{ $subCategory->subcategory_name_vn }} @else {{ $subCategory->subcategory_name_en }} @endif
-                                                                </h2>
+                                                                <a href="{{ url('subcategory/product/'. $subCategory->id.'/'.$subCategory->subcategory_slug_en) }}">
+                                                                    <h2 class="title">
+                                                                        @if(session()->get('language') == 'vietnam'){{ $subCategory->subcategory_name_vn }} @else {{ $subCategory->subcategory_name_en }} @endif
+                                                                    </h2>
+                                                                </a>
                                                                 @php
                                                                     $subSubCategories = App\Models\SubSubCategory::where('subcategory_id', $subCategory->id)->orderBy('subsubcategory_name_en', 'ASC')->get();
                                                                 @endphp
@@ -194,7 +196,7 @@
                                                                 @foreach($subSubCategories as $subSubCategory)
                                                                     <ul class="links">
                                                                         <li>
-                                                                            <a href="#">
+                                                                            <a href="{{ url('subsubcategory/product/'. $subSubCategory->id.'/'.$subSubCategory->subsubcategory_slug_en) }}">
                                                                                 @if(session()->get('language') == 'vietnam') {{ $subSubCategory->subsubcategory_name_vn }} @else {{ $subSubCategory->subsubcategory_name_en }} @endif
                                                                             </a>
                                                                         </li>

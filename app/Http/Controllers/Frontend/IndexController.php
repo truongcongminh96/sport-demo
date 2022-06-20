@@ -123,15 +123,39 @@ class IndexController extends Controller
         return view('frontend.product.product_details', compact('product', 'multiImage'));
     }
 
-    public function tagWiseProduct($tag) {
+    public function tagWiseProduct($tag)
+    {
         $products = Product::where('status', 1)
             ->where('product_tags_en', $tag)
             ->where('product_tags_vn', $tag)
             ->orderBy('id', 'DESC')
-            ->paginate(1);
+            ->paginate(3);
 
         $categories = Category::orderBy('id', 'ASC')->get();
 
         return view('frontend.tags.tags_view', compact('products', 'categories'));
+    }
+
+    public function subCategoryWiseProduct($subCategoryId, $slug)
+    {
+        $products = Product::where('status', 1)
+            ->where('subcategory_id', $subCategoryId)
+            ->orderBy('id', 'DESC')
+            ->paginate(3);
+
+        $categories = Category::orderBy('id', 'ASC')->get();
+
+        return view('frontend.product.subcategory_view', compact('products', 'categories'));
+    }
+
+    public function subSubCategoryWiseProduct($subSubCategoryId, $slug) {
+        $products = Product::where('status', 1)
+            ->where('subsubcategory_id', $subSubCategoryId)
+            ->orderBy('id', 'DESC')
+            ->paginate(6);
+
+        $categories = Category::orderBy('id', 'ASC')->get();
+
+        return view('frontend.product.sub_subcategory_view', compact('products', 'categories'));
     }
 }

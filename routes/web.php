@@ -129,5 +129,11 @@ Route::get('/vietnam/language', [LanguageController::class, 'vietnam'])->name('v
 /////////// Product Detail Page Url //////////
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
 
-////////// Front end product tags page
+////////// Frontend product tags page
 Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
+
+////////// Frontend Sub Category wise data
+Route::get('/subcategory/product/{subcategory_id}/{slug}', [IndexController::class, 'subCategoryWiseProduct']);
+
+////////// Frontend Sub->SubCategory wise data
+Route::get('/subsubcategory/product/{subsubcategory_id}/{slug}', [IndexController::class, 'subSubCategoryWiseProduct']);

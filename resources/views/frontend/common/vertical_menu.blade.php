@@ -19,15 +19,21 @@
                                 @endphp
                                 @foreach($subCategories as $subCategory)
                                     <div class="col-sm-12 col-md-3">
-                                        <h2 class="title">
-                                            @if(session()->get('language') == 'vietnam') {{ $subCategory->subcategory_name_vn }} @else {{ $subCategory->subcategory_name_en }} @endif
-                                        </h2>
+                                        <a href="{{ url('subcategory/product/'. $subCategory->id.'/'.$subCategory->subcategory_slug_en) }}">
+                                            <h2 class="title">
+                                                @if(session()->get('language') == 'vietnam') {{ $subCategory->subcategory_name_vn }} @else {{ $subCategory->subcategory_name_en }} @endif
+                                            </h2>
+                                        </a>
                                         @php
                                             $subSubCategories = App\Models\SubSubCategory::where('subcategory_id', $subCategory->id)->orderBy('subsubcategory_name_en', 'ASC')->get();
                                         @endphp
                                         @foreach($subSubCategories as $subSubCategory)
                                             <ul class="links list-unstyled">
-                                                <li><a href="#">@if(session()->get('language') == 'vietnam') {{ $subSubCategory->subsubcategory_name_vn }} @else {{ $subSubCategory->subsubcategory_name_en }} @endif</a></li>
+                                                <li>
+                                                    <a href="{{ url('subsubcategory/product/'. $subSubCategory->id.'/'.$subSubCategory->subsubcategory_slug_en) }}">
+                                                        @if(session()->get('language') == 'vietnam') {{ $subSubCategory->subsubcategory_name_vn }} @else {{ $subSubCategory->subsubcategory_name_en }} @endif
+                                                    </a>
+                                                </li>
                                             </ul>
                                         @endforeach
                                     </div>
