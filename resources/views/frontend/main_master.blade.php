@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="">
+    <meta name="csrf_token" content="{{ csrf_token() }}">
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
@@ -78,6 +79,99 @@
             break;
     }
     @endif
+</script>
+
+<!-- Add Cart Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><span id="pname"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="..." alt="Card image cap" style="height: 200px; width: 180px" id="pimage">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <ul class="list-group">
+                            <li class="list-group-item">Product Price: <strong id="price"></strong></li>
+                            <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
+                            <li class="list-group-item">Category: <strong id="pcategory"></strong></li>
+                            <li class="list-group-item">Brand: <strong id="pbrand"></strong></li>
+                            <li class="list-group-item">Stock <strong id="price"></strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Choose Color</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Choose Size</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Quantity</label>
+                            <input type="number" class="form-control" id="" value="1" min="1">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-2">Add to cart</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    ///Start product view Modal
+    function productView(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/product/view/modal/' + id,
+            dataType: 'json',
+            success: function (data) {
+                $('#pname').text(data.product.product_name_en);
+                $('#price').text(data.product.selling_price);
+                $('#pcode').text(data.product.product_code);
+                $('#pcategory').text(data.product.category.category_name_en);
+                $('#pbrand').text(data.product.brand.brand_name_en);
+                $('#pimage').attr('src', '/' + data.product.product_thumbnail);
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

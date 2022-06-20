@@ -173,7 +173,8 @@ class IndexController extends Controller
         return view('frontend.product.subcategory_view', compact('products', 'categories'));
     }
 
-    public function subSubCategoryWiseProduct($subSubCategoryId, $slug) {
+    public function subSubCategoryWiseProduct($subSubCategoryId, $slug)
+    {
         $products = Product::where('status', 1)
             ->where('subsubcategory_id', $subSubCategoryId)
             ->orderBy('id', 'DESC')
@@ -182,5 +183,26 @@ class IndexController extends Controller
         $categories = Category::orderBy('id', 'ASC')->get();
 
         return view('frontend.product.sub_subcategory_view', compact('products', 'categories'));
+    }
+
+    public function productViewAjax($id)
+    {
+        $product = Product::with('category', 'brand')->findOrFail($id);
+
+        $colorEn = $product->product_color_en;
+        $productColorEn = explode(',', $colorEn);
+//        $colorVn = $product->product_color_vn;
+//        $productColorVn = explode(',', $colorVn);
+
+        $sizeEn = $product->product_size_en;
+        $productSizeEn = explode(',', $sizeEn);
+//        $sizeVn = $product->product_size_vn;
+//        $productSizeVn = explode(',', $sizeVn);
+
+        return response()->json(array(
+            'product' => $product,
+            'color' => $productColorEn,
+            'size' => $productSizeEn
+        ));
     }
 }
