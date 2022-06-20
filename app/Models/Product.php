@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static latest()
  * @method static findOrFail($id)
  * @method static where(string $string, int $int)
+ * @method static groupBy(string $string)
  */
 class Product extends Model
 {

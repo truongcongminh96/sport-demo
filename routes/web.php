@@ -128,3 +128,6 @@ Route::get('/vietnam/language', [LanguageController::class, 'vietnam'])->name('v
 
 /////////// Product Detail Page Url //////////
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
+
+////////// Front end product tags page
+Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
