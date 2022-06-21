@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="">
-    <meta name="csrf_token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
@@ -25,10 +25,11 @@
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
+          rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body class="cnt-home">
@@ -60,11 +61,11 @@
 <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
         @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}"
-    switch(type) {
+    switch (type) {
         case 'info':
             toastr.infor("{{ Session::get('message') }}");
             break;
@@ -82,12 +83,13 @@
 </script>
 
 <!-- Add Cart Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><strong><span id="pname"></span></strong></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -95,21 +97,27 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="" alt="Card image cap" style="height: 200px; width: 200px" id="pimage">
+                            <img class="card-img-top" src="" alt="Card image cap" style="height: 200px; width: 200px"
+                                 id="pimage">
 
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <ul class="list-group">
-                            <li class="list-group-item">Product Price: <strong class="text-danger"><span id="pprice"></span></strong><br><del id="oldprice"></del></li>
+                            <li class="list-group-item">Product Price: <strong class="text-danger"><span
+                                        id="pprice"></span></strong><br>
+                                <del id="oldprice"></del>
+                            </li>
                             <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
                             <li class="list-group-item">Category: <strong id="pcategory"></strong></li>
                             <li class="list-group-item">Brand: <strong id="pbrand"></strong></li>
                             <li class="list-group-item">
                                 Stock:
-                                <span class="badge badge-pill badge-success" id="available" style="background: green; color: white;"></span>
-                                <span class="badge badge-pill badge-danger" id="stockout" style="background: red; color: white;"></span>
+                                <span class="badge badge-pill badge-success" id="available"
+                                      style="background: green; color: white;"></span>
+                                <span class="badge badge-pill badge-danger" id="stockout"
+                                      style="background: red; color: white;"></span>
                             </li>
                         </ul>
                     </div>
@@ -117,24 +125,25 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Choose Color</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="color">
+                            <select class="form-control" id="color" name="color">
 
                             </select>
                         </div>
 
                         <div class="form-group" id="sizeArea">
                             <label for="exampleFormControlSelect1">Choose Size</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="size">
+                            <select class="form-control" id="size" name="size">
 
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Quantity</label>
-                            <input type="number" class="form-control" id="" value="1" min="1">
+                            <label for="qty">Quantity</label>
+                            <input type="number" class="form-control" id="qty" value="1" min="1">
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2">Add to cart</button>
+                        <input type="hidden" id="product_id">
+                        <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add to cart</button>
                     </div>
 
                 </div>
@@ -147,7 +156,7 @@
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
@@ -164,6 +173,9 @@
                 $('#pcategory').text(data.product.category.category_name_en);
                 $('#pbrand').text(data.product.brand.brand_name_en);
                 $('#pimage').attr('src', '/' + data.product.product_thumbnail);
+
+                $('#product_id').val(id);
+                $('#qty').val(1);
 
                 if (data.product.discount_price === null) {
                     $('#pprice').text('');
@@ -186,12 +198,12 @@
 
                 $('select[name="color"]').empty();
                 $.each(data.color, function (key, value) {
-                    $('select[name="color"]').append('<option value=" '+value+' ">'+value+'</option>');
+                    $('select[name="color"]').append('<option value=" ' + value + ' ">' + value + '</option>');
                 });
 
                 $('select[name="size"]').empty();
                 $.each(data.size, function (key, value) {
-                    $('select[name="size"]').append('<option value=" '+value+' ">'+value+'</option>');
+                    $('select[name="size"]').append('<option value=" ' + value + ' ">' + value + '</option>');
                     if (data.size === "") {
                         $('#sizeArea').hide();
                     } else {
@@ -202,6 +214,28 @@
         });
     }
 
+    function addToCart() {
+        var product_name = $('#pname').text();
+        var id = $('#product_id').val();
+        var color = $('#color option:selected').text();
+        var size = $('#size option:selected').text();
+        var quantity = $('#qty').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {
+                color: color,
+                size: size,
+                quantity: quantity,
+                product_name: product_name
+            },
+            url: "/cart/data/store/" + id,
+            success: function (data) {
+                $('#closeModel').click();
+                console.log(data);
+            }
+        });
+    }
 </script>
 </body>
 </html>
