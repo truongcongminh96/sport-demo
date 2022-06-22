@@ -493,4 +493,7 @@
                 <div class="clearfix"></div>
             </div><!-- /.row -->
         </div>
+            <br>
+        </div>
+
 @endsection

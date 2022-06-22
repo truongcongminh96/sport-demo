@@ -263,13 +263,12 @@
     function miniCart() {
         $.ajax({
             type: 'GET',
-            url: 'product/mini/cart',
+            url: '/product/mini/cart',
             dataType: 'json',
             success: function (response) {
                 $('span[id="cartSubTotal"]').text(response.cart_total);
                 $('#cartQty').text(response.cart_qty);
                 var miniCart = "";
-
 
                 $.each(response.carts, function (key, value) {
                     miniCart += `
@@ -360,5 +359,79 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+    function wishlist() {
+        $.ajax({
+            type: 'GET',
+            url: '/get-wishlist-product',
+            dataType: 'json',
+            success: function (response) {
+                var rows = "";
+
+                $.each(response, function (key, value) {
+                    rows += `
+                        <tr>
+                                <td class="col-md-2"><img src="/${value.product.product_thumbnail}" alt="imga"></td>
+                                <td class="col-md-7">
+                                    <div class="product-name"><a href="#">${value.product.product_name_en}</a></div>
+
+                                    <div class="price">
+                                        ${
+                                            value.product.discount_price == null
+                                            ? `${value.product.selling_price}`
+                                            : `${value.product.discount_price} <span>${value.product.selling_price}</span>`
+                                        }
+                                    </div>
+                                </td>
+                                <td class="col-md-2">
+                                    <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="${value.product_id}" onclick="productView(this.id)"> Add to cart </button>
+                                </td>
+                                <td class="col-md-1 close-btn">
+                                    <button type="submit" class="" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="fa fa-times"></i></button>
+                                </td>
+                        </tr>
+                    `;
+                });
+
+                $('#wishlist').html(rows);
+            }
+        });
+    }
+
+    wishlist();
+
+    function wishlistRemove(rowId) {
+        $.ajax({
+            type: 'GET',
+            url: '/wishlist-remove/' + rowId,
+            dataType: 'json',
+            success: function (data) {
+                wishlist();
+
+                const TOAST = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if ($.isEmptyObject(data.error)) {
+                    TOAST.fire({
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    TOAST.fire({
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
