@@ -245,12 +245,12 @@
 
                 if ($.isEmptyObject(data.error)) {
                     TOAST.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: data.success
                     });
                 } else {
                     TOAST.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: data.error
                     });
                 }
@@ -317,12 +317,42 @@
 
                 if ($.isEmptyObject(data.error)) {
                     TOAST.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: data.success
                     });
                 } else {
                     TOAST.fire({
-                        type: 'error',
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function addToWishlist(product_id) {
+        $.ajax({
+            type: 'POST',
+            url: '/add-to-wishlist/' + product_id,
+            success: function (data) {
+                const TOAST = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if ($.isEmptyObject(data.error)) {
+                    TOAST.fire({
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    TOAST.fire({
+                        icon: 'error',
                         title: data.error
                     });
                 }
