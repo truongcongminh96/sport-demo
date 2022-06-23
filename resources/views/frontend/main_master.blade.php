@@ -433,5 +433,118 @@
     }
 </script>
 
+<script type="text/javascript">
+    function cart() {
+        $.ajax({
+            type: 'GET',
+            url: '/user/get-cart-product',
+            dataType: 'json',
+            success: function (response) {
+                var rows = "";
+
+                $.each(response.carts, function (key, value) {
+                    rows += `
+                        <tr>
+                                <td class="romove-item">
+                                    <a title="cancel" class="icon" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                                <td class="cart-image">
+                                    <a class="entry-thumbnail">
+                                        <img src="/${value.options.image}" alt="">
+                                    </a>
+                                </td>
+                                <td class="cart-product-name-info">
+                                    <h4 class='cart-product-description'><a>${value.name}</a></h4>
+                                <div class="cart-product-info">
+                                    <span class="product-color">COLOR:<span>${value.options.color}</span></span>
+                                </div>
+                                <div class="cart-product-info">
+                                    <span class="product-color">Size:
+                                            ${
+                                                value.options.size == null
+                                                ? `<span>...</span>`
+                                                : `<strong>${value.options.size}</strong>`
+                                            }
+                                    </span>
+                                </div>
+                                </td>
+                                <td class="cart-product-quantity">
+                                        <button type="submit" class="arrow plus gradient" id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>
+                                        <input type="text" style="width: 25px; text-align: center" disabled value="${value.qty}">
+                                        ${
+                                            value.qty > 1
+                                                ? `<button type="submit" class="arrow plus gradient" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
+                                                : `<button class="arrow plus gradient" disabled>-</button>`
+                                        }
+                                </td>
+                                <td class="cart-product-grand-total"><span class="cart-grand-total-price">${value.price * value.qty}</span></td>
+                        </tr>
+                    `;
+                });
+
+                $('#cartPage').html(rows);
+            }
+        });
+    }
+
+    cart();
+
+    function cartRemove(rowId) {
+        $.ajax({
+            type: 'GET',
+            url: '/user/cart-remove/' + rowId,
+            dataType: 'json',
+            success: function (data) {
+                cart();
+                miniCart();
+
+                const TOAST = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if ($.isEmptyObject(data.error)) {
+                    TOAST.fire({
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    TOAST.fire({
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
+            }
+        });
+    }
+
+    function cartIncrement(rowId) {
+        $.ajax({
+            type: 'GET',
+            url: "/cart-increment/" + rowId,
+            dataType: 'json',
+            success: function (data) {
+                cart();
+                miniCart();
+            }
+        });
+    }
+
+    function cartDecrement(rowId) {
+        $.ajax({
+            type: 'GET',
+            url: "/cart-decrement/" + rowId,
+            dataType: 'json',
+            success: function (data) {
+                cart();
+                miniCart();
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

@@ -9,6 +9,7 @@ use App\Models\MultiImage;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,7 @@ class IndexController extends Controller
 
     public function userLogout()
     {
+//        Cart::destroy();
         Auth::logout();
         return redirect()->route('login');
     }
