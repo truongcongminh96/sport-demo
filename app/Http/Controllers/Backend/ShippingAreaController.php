@@ -71,7 +71,63 @@ class ShippingAreaController extends Controller
     public function districtView()
     {
         $provinces = Province::orderBy('province_name', 'ASC')->get();
-        $districts = District::orderBy('id', 'DESC')->get();
+        $districts = District::with('province')->orderBy('id', 'DESC')->get();
         return view('backend.ship.district.view_district', compact('provinces', 'districts'));
+    }
+
+    public function districtStore(Request $request)
+    {
+        $request->validate([
+            'province_id' => 'required',
+            'district_name' => 'required'
+        ]);
+
+        District::insert([
+            'province_id' => $request->province_id,
+            'district_name' => $request->district_name,
+            'created_at' => Carbon::now()
+        ]);
+
+        $notification = array(
+            'message' => 'District Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function districtEdit($id)
+    {
+        $provinces = Province::orderBy('province_name', 'ASC')->get();
+        $district = District::findOrFail($id);
+        return view('backend.ship.district.district_edit', compact('district', 'provinces'));
+    }
+
+    public function districtUpdate(Request $request)
+    {
+        $districtId = $request->id;
+        District::findOrFail($districtId)->update([
+            'province_id' => $request->province_id,
+            'district_name' => $request->district_name
+        ]);
+
+        $notification = array(
+            'message' => 'District Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->route('manage-district')->with($notification);
+    }
+
+    public function districtDelete($id)
+    {
+        District::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'District Deleted Successfully',
+            'alert-type' => 'warning'
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

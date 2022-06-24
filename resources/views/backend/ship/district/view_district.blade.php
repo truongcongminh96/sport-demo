@@ -27,11 +27,11 @@
                                     <tbody>
                                     @foreach($districts as $item)
                                         <tr>
-                                            <td>{{ $item->province_id}}</td>
+                                            <td>{{ $item->province->province_name }}</td>
                                             <td>{{ $item->district_name}}</td>
                                             <td>
-                                                <a href="{{ route('province.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ route('province.delete', $item->id) }}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('district.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ route('district.delete', $item->id) }}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -51,20 +51,36 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Province</h3>
+                            <h3 class="box-title">Add District</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
 
-                                <form method="POST" action="{{ route('province.store') }}">
+                                <form method="POST" action="{{ route('district.store') }}">
                                     @csrf
 
                                     <div class="form-group">
-                                        <h5>Province Name<span class="text-danger">*</span></h5>
+                                        <h5>Province Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="province_name" class="form-control"> </div>
-                                        @error('province')
+                                            <select name="province_id" class="form-control">
+                                                <option value="" selected="" disabled="">Select Province</option>
+                                                @foreach($provinces as $province)
+                                                    <option value="{{ $province->id }}">{{ $province->province_name }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('province_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h5>District Name<span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="district_name" class="form-control"> </div>
+                                        @error('district_name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
