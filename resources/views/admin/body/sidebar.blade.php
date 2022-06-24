@@ -107,6 +107,7 @@
                 <ul class="treeview-menu">
                     <li class="{{ ($route == 'manage-province') ? 'active' : '' }}"><a href="{{ route('manage-province') }}"><i class="ti-more"></i>Ship Province</a></li>
                     <li class="{{ ($route == 'manage-district') ? 'active' : '' }}"><a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship District</a></li>
+                    <li class="{{ ($route == 'manage-ward') ? 'active' : '' }}"><a href="{{ route('manage-ward') }}"><i class="ti-more"></i>Ship Ward</a></li>
                 </ul>
             </li>
 

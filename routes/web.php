@@ -194,4 +194,12 @@ Route::prefix('shipping')->group(function () {
     Route::get('/district/edit/{id}', [ShippingAreaController::class, 'districtEdit'])->name('district.edit');
     Route::post('/district/update', [ShippingAreaController::class, 'districtUpdate'])->name('district.update');
     Route::get('/district/delete/{id}', [ShippingAreaController::class, 'districtDelete'])->name('district.delete');
+
+    // Manage ward
+    Route::get('/ward/view', [ShippingAreaController::class, 'wardView'])->name('manage-ward');
+    Route::post('/ward/store', [ShippingAreaController::class, 'wardStore'])->name('ward.store');
+    Route::get('/ward/edit/{id}', [ShippingAreaController::class, 'wardEdit'])->name('ward.edit');
+    Route::post('/ward/update', [ShippingAreaController::class, 'wardUpdate'])->name('ward.update');
+    Route::get('/ward/delete/{id}', [ShippingAreaController::class, 'wardDelete'])->name('ward.delete');
+    Route::get('/ward/district/{province_id}', [ShippingAreaController::class, 'getDistrict']);
 });
