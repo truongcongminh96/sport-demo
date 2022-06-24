@@ -182,9 +182,16 @@ Route::prefix('coupons')->group(function () {
 
 // Admin shipping All Routes
 Route::prefix('shipping')->group(function () {
-    Route::get('/division/view', [ShippingAreaController::class, 'divisionView'])->name('manage-division');
-    Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store');
-    Route::get('/division/edit/{id}', [ShippingAreaController::class, 'divisionEdit'])->name('division.edit');
-    Route::post('/division/update', [ShippingAreaController::class, 'divisionUpdate'])->name('division.update');
-    Route::get('/division/delete/{id}', [ShippingAreaController::class, 'divisionDelete'])->name('division.delete');
+    Route::get('/province/view', [ShippingAreaController::class, 'provinceView'])->name('manage-province');
+    Route::post('/province/store', [ShippingAreaController::class, 'provinceStore'])->name('province.store');
+    Route::get('/province/edit/{id}', [ShippingAreaController::class, 'provinceEdit'])->name('province.edit');
+    Route::post('/province/update', [ShippingAreaController::class, 'provinceUpdate'])->name('province.update');
+    Route::get('/province/delete/{id}', [ShippingAreaController::class, 'provinceDelete'])->name('province.delete');
+
+    // Manage district
+    Route::get('/district/view', [ShippingAreaController::class, 'districtView'])->name('manage-district');
+    Route::post('/district/store', [ShippingAreaController::class, 'districtStore'])->name('district.store');
+    Route::get('/district/edit/{id}', [ShippingAreaController::class, 'districtEdit'])->name('district.edit');
+    Route::post('/district/update', [ShippingAreaController::class, 'districtUpdate'])->name('district.update');
+    Route::get('/district/delete/{id}', [ShippingAreaController::class, 'districtDelete'])->name('district.delete');
 });

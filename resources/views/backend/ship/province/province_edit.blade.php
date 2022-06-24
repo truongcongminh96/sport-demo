@@ -13,22 +13,22 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Edit Division</h3>
+                            <h3 class="box-title">Edit Province</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
 
-                                <form method="POST" action="{{ route('division.update', $division->id) }}">
+                                <form method="POST" action="{{ route('province.update', $province->id) }}">
                                     @csrf
 
-                                    <input type="hidden" name="id" value="{{ $division->id }}">
+                                    <input type="hidden" name="id" value="{{ $province->id }}">
 
                                     <div class="form-group">
-                                        <h5>Division Name  <span class="text-danger">*</span></h5>
+                                        <h5>Province Name  <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="division_name" class="form-control" value="{{ $division->division_name }}"> </div>
-                                        @error('division_name')
+                                            <input type="text" name="province_name" class="form-control" value="{{ $province->province_name }}"> </div>
+                                        @error('province_name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

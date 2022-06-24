@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static insert(array $array)
  * @method static findOrFail($id)
  */
-class ShipDivision extends Model
+class Province extends Model
 {
     use HasFactory;
 
