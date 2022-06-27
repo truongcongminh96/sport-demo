@@ -378,10 +378,10 @@
 
                                     <div class="price">
                                         ${
-                                            value.product.discount_price == null
-                                            ? `${value.product.selling_price}`
-                                            : `${value.product.discount_price} <span>${value.product.selling_price}</span>`
-                                        }
+                        value.product.discount_price == null
+                            ? `${value.product.selling_price}`
+                            : `${value.product.discount_price} <span>${value.product.selling_price}</span>`
+                    }
                                     </div>
                                 </td>
                                 <td class="col-md-2">
@@ -461,10 +461,10 @@
                                 <div class="cart-product-info">
                                     <span class="product-color">Size:
                                             ${
-                                                value.options.size == null
-                                                ? `<span>...</span>`
-                                                : `<strong>${value.options.size}</strong>`
-                                            }
+                        value.options.size == null
+                            ? `<span>...</span>`
+                            : `<strong>${value.options.size}</strong>`
+                    }
                                     </span>
                                 </div>
                                 </td>
@@ -472,10 +472,10 @@
                                         <button type="submit" class="arrow plus gradient" id="${value.rowId}" onclick="cartIncrement(this.id)">+</button>
                                         <input type="text" style="width: 25px; text-align: center" disabled value="${value.qty}">
                                         ${
-                                            value.qty > 1
-                                                ? `<button type="submit" class="arrow plus gradient" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
-                                                : `<button class="arrow plus gradient" disabled>-</button>`
-                                        }
+                        value.qty > 1
+                            ? `<button type="submit" class="arrow plus gradient" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
+                            : `<button class="arrow plus gradient" disabled>-</button>`
+                    }
                                 </td>
                                 <td class="cart-product-grand-total"><span class="cart-grand-total-price">${value.price * value.qty}</span></td>
                         </tr>
@@ -495,8 +495,11 @@
             url: '/user/cart-remove/' + rowId,
             dataType: 'json',
             success: function (data) {
+                couponCalculation();
                 cart();
                 miniCart();
+                $('#couponField').show();
+                $('#coupon_name').val('');
 
                 const TOAST = Swal.mixin({
                     toast: true,
@@ -527,6 +530,7 @@
             url: "/cart-increment/" + rowId,
             dataType: 'json',
             success: function (data) {
+                couponCalculation();
                 cart();
                 miniCart();
             }
@@ -539,8 +543,132 @@
             url: "/cart-decrement/" + rowId,
             dataType: 'json',
             success: function (data) {
+                couponCalculation();
                 cart();
                 miniCart();
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function applyCoupon() {
+        var coupon_name = $('#coupon_name').val();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: {coupon_name: coupon_name},
+            url: "{{ url('/coupon-apply') }}",
+            success: function (data) {
+                couponCalculation();
+                $('#couponField').hide();
+
+                const TOAST = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if ($.isEmptyObject(data.error)) {
+                    TOAST.fire({
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    TOAST.fire({
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
+
+            }
+        });
+    }
+
+    function couponCalculation() {
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('/coupon-calculation') }}",
+            dataType: 'json',
+            success: function (data) {
+                if (data.total) {
+                    $('#couponCalField').html(
+                        `
+                            <tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        Subtotal<span class="inner-left-md">${data.total}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        Grand Total<span class="inner-left-md">${data.total}</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        `
+                    );
+                } else {
+                    $('#couponCalField').html(
+                        `
+                            <tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        Subtotal<span class="inner-left-md">${data.subtotal}</span>
+                                    </div>
+                                    <div class="cart-sub-total">
+                                        Coupon<span class="inner-left-md">${data.coupon_name}</span>
+                                        <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i></button>
+                                    </div>
+                                    <div class="cart-sub-total">
+                                        Discount amount<span class="inner-left-md">${data.discount_amount}</span>
+                                    </div>
+                                    <div class="cart-grand-total">
+                                        Grand Total<span class="inner-left-md">${data.total_amount}</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        `
+                    );
+                }
+            }
+        });
+    }
+
+    couponCalculation();
+</script>
+
+<script type="text/javascript">
+    function couponRemove() {
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('/coupon-remove') }}",
+            dataType: 'json',
+            success: function (data) {
+                couponCalculation();
+                $('#couponField').show();
+                $('#coupon_name').val('');
+
+                const TOAST = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if ($.isEmptyObject(data.error)) {
+                    TOAST.fire({
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    TOAST.fire({
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
             }
         });
     }

@@ -203,3 +203,7 @@ Route::prefix('shipping')->group(function () {
     Route::get('/ward/delete/{id}', [ShippingAreaController::class, 'wardDelete'])->name('ward.delete');
     Route::get('/ward/district/{province_id}', [ShippingAreaController::class, 'getDistrict']);
 });
+
+Route::post('coupon-apply', [CartController::class, 'couponApply']);
+Route::get('coupon-calculation', [CartController::class, 'couponCalculation']);
+Route::get('coupon-remove', [CartController::class, 'couponRemove']);

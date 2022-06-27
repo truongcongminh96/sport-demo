@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Provinces;
-use App\Models\Districts;
-use App\Models\Wards;
+use App\Models\Province;
+use App\Models\District;
 use Illuminate\Database\Seeder;
 use File;
 
@@ -19,7 +18,7 @@ class VNSeeder extends Seeder
     {
         $this->createProvinces();
         $this->createDistricts();
-        $this->createWards();
+//        $this->createWards();
     }
 
     public function createDistricts()
@@ -7080,10 +7079,10 @@ class VNSeeder extends Seeder
 
         $Districts = json_decode($Datadistricts);
         foreach ($Districts as $District) {
-            Districts::create([
+            District::create([
                 'id' => $District->code,
-                'name' => $District->name_with_type,
-                'provinces_id' => $District->parent_code
+                'district_name' => $District->name_with_type,
+                'province_id' => $District->parent_code
             ]);
         }
     }
@@ -7538,7 +7537,7 @@ class VNSeeder extends Seeder
 
         $Provinces = json_decode($dataProvinces);
         foreach ($Provinces as $Province) {
-            Provinces::create(['id' => $Province->code ,'name' => $Province->name_with_type]);
+            Province::create(['id' => $Province->code ,'province_name' => $Province->name_with_type]);
         }
 
     }
