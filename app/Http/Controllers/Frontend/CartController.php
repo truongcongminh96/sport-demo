@@ -134,4 +134,31 @@ class CartController extends Controller
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon removed']);
     }
+
+    public function checkoutCreate()
+    {
+        if (!Auth::check()) {
+            $notification = array(
+                'message' => 'You need to Login First',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('login')->with($notification);
+        }
+
+        if (Cart::total() <= 0) {
+            $notification = array(
+                'message' => 'You need to add 1 one product',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->to('/')->with($notification);
+        }
+
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        return view('frontend.checkout.checkout_view', compact('carts', 'cartQty', 'cartTotal'));
+    }
 }
