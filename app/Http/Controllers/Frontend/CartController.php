@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\Province;
 use App\Models\Wishlist;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -159,6 +160,8 @@ class CartController extends Controller
         $cartQty = Cart::count();
         $cartTotal = Cart::total();
 
-        return view('frontend.checkout.checkout_view', compact('carts', 'cartQty', 'cartTotal'));
+        $provinces = Province::orderBy('province_name', 'ASC')->get();
+
+        return view('frontend.checkout.checkout_view', compact('carts', 'cartQty', 'cartTotal', 'provinces'));
     }
 }

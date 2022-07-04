@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Province;
 use App\Models\District;
+use App\Models\Ward;
 use Illuminate\Database\Seeder;
 use File;
 
@@ -16,9 +17,9 @@ class VNSeeder extends Seeder
      */
     public function run()
     {
-        $this->createProvinces();
-        $this->createDistricts();
-//        $this->createWards();
+//        $this->createProvinces();
+//        $this->createDistricts();
+        $this->createWards();
     }
 
     public function createDistricts()
@@ -7090,7 +7091,7 @@ class VNSeeder extends Seeder
     public function createProvinces()
     {
         // Seeeding Tinh Thanh Pho
-        $dataProvinces =  '
+        $dataProvinces = '
         {
             "26": {
                 "name": "Vĩnh Phúc",
@@ -7537,7 +7538,7 @@ class VNSeeder extends Seeder
 
         $Provinces = json_decode($dataProvinces);
         foreach ($Provinces as $Province) {
-            Province::create(['id' => $Province->code ,'province_name' => $Province->name_with_type]);
+            Province::create(['id' => $Province->code, 'province_name' => $Province->name_with_type]);
         }
 
     }
@@ -7545,27 +7546,27 @@ class VNSeeder extends Seeder
     public function createWards()
     {
         // seeding for phuong xa
-        $getDistrictIDs = Districts::pluck('id')->toArray();
+        $getDistrictIDs = District::pluck('id')->toArray();
         foreach ($getDistrictIDs as $filespath) {
             switch (strlen((string)$filespath)) {
                 case '1':
-                    $filepath = '00'.$filespath;
+                    $filepath = '00' . $filespath;
                     break;
                 case '2':
-                    $filepath = '0'.$filespath;
+                    $filepath = '0' . $filespath;
                     break;
                 default:
                     $filepath = $filespath;
                     break;
             }
-            $fileContent = File::get('database/seeders/wards-data/'.$filepath.'.json');
+            $fileContent = File::get('database/seeders/wards-data/' . $filepath . '.json');
             $parseFile = json_decode($fileContent);
             foreach ($parseFile as $wardsInfo) {
                 dump($wardsInfo);
-                Wards::create([
+                Ward::create([
                     'id' => $wardsInfo->code,
-                    'name' => $wardsInfo->name_with_type,
-                    'districts_id' => $wardsInfo->parent_code
+                    'ward_name' => $wardsInfo->name_with_type,
+                    'district_id' => $wardsInfo->parent_code
                 ]);
             }
         }
