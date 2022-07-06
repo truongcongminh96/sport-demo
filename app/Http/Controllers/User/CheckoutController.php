@@ -21,17 +21,24 @@ class CheckoutController extends Controller
         return json_encode($wards);
     }
 
-    public function checkoutStore(Request $request) {
-        dd($request->all());
+    public function checkoutStore(Request $request)
+    {
         $data = [];
         $data['shipping_name'] = $request->shipping_name;
         $data['shipping_email'] = $request->shipping_email;
         $data['shipping_phone'] = $request->shipping_phone;
         $data['post_code'] = $request->post_code ?? null;
-        $data['shipping_name'] = $request->shipping_name;
-        $data['shipping_name'] = $request->shipping_name;
-        $data['shipping_name'] = $request->shipping_name;
-        $data['shipping_name'] = $request->shipping_name;
-        $data['shipping_name'] = $request->shipping_name;
+        $data['province_id'] = $request->province_id;
+        $data['district_id'] = $request->district_id;
+        $data['ward_id'] = $request->ward_id;
+        $data['notes'] = $request->notes;
+
+        if ($request->payment_method == 'stripe') {
+            return view('frontend.payment.stripe', compact('data'));
+        } else if ($request->payment_method == 'card') {
+            return 'card';
+        } else {
+            return 'cash';
+        }
     }
 }
