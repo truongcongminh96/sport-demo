@@ -16,6 +16,7 @@ use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\User\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,6 +165,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
     Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
+    Route::post('/stripe/order', [OrderController::class, 'stripeOrder'])->name('stripe.order');
 });
 
 Route::get('/mycart', [CartPageController::class, 'myCart'])->name('mycart');

@@ -125,7 +125,7 @@
                                                 <div class="form-group">
                                                     <h5>Ward Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="ward_id" class="form-control" required="">
+                                                        <select name="ward_id" class="form-control">
                                                             <option value="" selected="" disabled="">Select
                                                                 Ward
                                                             </option>

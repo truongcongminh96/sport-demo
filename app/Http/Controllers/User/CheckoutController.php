@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Ward;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -32,9 +33,10 @@ class CheckoutController extends Controller
         $data['district_id'] = $request->district_id;
         $data['ward_id'] = $request->ward_id;
         $data['notes'] = $request->notes;
+        $cartTotal = Cart::total();
 
         if ($request->payment_method == 'stripe') {
-            return view('frontend.payment.stripe', compact('data'));
+            return view('frontend.payment.stripe', compact('data', 'cartTotal'));
         } else if ($request->payment_method == 'card') {
             return 'card';
         } else {
