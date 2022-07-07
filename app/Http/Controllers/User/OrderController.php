@@ -7,6 +7,7 @@ use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Ward;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -88,5 +89,17 @@ class OrderController extends Controller
         $order = Order::with('province', 'district', 'ward', 'user')->where(['id' => $orderId, 'user_id' => Auth::id()])->first();
         $orderItem = OrderItem::with('product')->where(['order_id' => $orderId])->orderBy('id', 'DESC')->get();
         return view('frontend.user.order.order_view_details', compact('order', 'orderItem'));
+    }
+
+    public function invoiceDownload($orderId)
+    {
+        $order = Order::with('province', 'district', 'ward', 'user')->where(['id' => $orderId, 'user_id' => Auth::id()])->first();
+        $orderItem = OrderItem::with('product')->where(['order_id' => $orderId])->orderBy('id', 'DESC')->get();
+//        return view('frontend.user.order.order_invoice', compact('order', 'orderItem'));
+        $pdf = Pdf::loadView('frontend.user.order.order_invoice', compact('order', 'orderItem'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path()
+        ]);
+        return $pdf->download('invoice.pdf');
     }
 }

@@ -170,6 +170,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/cash/order', [CashController::class, 'cashOrder'])->name('cash.order');
     Route::get('/my/orders', [OrderController::class, 'myOrders'])->name('my.orders');
     Route::get('/order_details/{order_id}', [OrderController::class, 'orderDetails']);
+    Route::get('/invoice_download/{order_id}', [OrderController::class, 'invoiceDownload']);
 });
 
 Route::get('/mycart', [CartPageController::class, 'myCart'])->name('mycart');
