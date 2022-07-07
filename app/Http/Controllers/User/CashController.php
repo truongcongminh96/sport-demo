@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class OrderController extends Controller
+class CashController extends Controller
 {
-    public function stripeOrder(Request $request)
+    public function cashOrder(Request $request)
     {
         if (Session::has('coupon')) {
             $totalAmount = Session::get('coupon')['total_amount'];
@@ -34,9 +32,8 @@ class OrderController extends Controller
             'post_code' => $request->post_code,
             'notes' => $request->notes,
 
-            'payment_type' => 'Stripe',
-            'payment_method' => 'Stripe',
-
+            'payment_type' => 'COD',
+            'payment_method' => 'COD',
             'transaction_id' => 'demo',
             'currency' => 'VND',
             'amount' => (int)$totalAmount,
@@ -75,18 +72,5 @@ class OrderController extends Controller
         );
 
         return redirect()->route('dashboard')->with($notification);
-    }
-
-    public function myOrders()
-    {
-        $orders = Order::where(['user_id' => Auth::id()])->orderBy('id', 'DESC')->get();
-        return view('frontend.user.order.order_view', compact('orders'));
-    }
-
-    public function orderDetails($orderId)
-    {
-        $order = Order::with('province', 'district', 'ward', 'user')->where(['id' => $orderId, 'user_id' => Auth::id()])->first();
-        $orderItem = OrderItem::with('product')->where(['order_id' => $orderId])->orderBy('id', 'DESC')->get();
-        return view('frontend.user.order.order_view_details', compact('order', 'orderItem'));
     }
 }
