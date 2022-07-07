@@ -1,14 +1,32 @@
-@extends('frontend.main_master')
-@section('content')
-    <div class="body-content">
-        <div class="container">
+@extends('admin.admin_master')
+@section('admin')
+    <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="d-flex align-items-center">
+                <div class="mr-auto">
+                    <h3 class="page-title">Order Details</h3>
+                    <div class="d-inline-block align-items-center">
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+                                <li class="breadcrumb-item" aria-current="page">Order Details</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main content -->
+        <section class="content">
             <div class="row">
-                @include('frontend.common.user_sidebar')
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-header"><h4>Shipping Details</h4></div>
-                        <hr>
-                        <div class="card-body" style="background: #E9EBEC;">
+                <!--Bordered box!-->
+                <div class="col-md-6 col-12">
+                    <div class="box box-bordered border-primary">
+                        <div class="box-header with-border">
+                            <h4 class="box-title"><strong>Shipping</strong> details</h4>
+                        </div>
+
                             <table class="table">
                                 <tr>
                                     <th> Shipping Name :</th>
@@ -51,60 +69,62 @@
                                 </tr>
 
                             </table>
-                        </div>
+
                     </div>
-                </div> <!-- // end col md -5 -->
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-header"><h4>Order Details <span
-                                    class="text-danger">Invoice: {{ $order->invoice_no }}</span></h4></div>
-                        <hr>
-                        <div class="card-body" style="background: #E9EBEC;">
-                            <table class="table">
-                                <tr>
-                                    <th> Name :</th>
-                                    <th> {{ $order->user->name }} </th>
-                                </tr>
-
-                                <tr>
-                                    <th> Shipping Phone :</th>
-                                    <th> {{ $order->user->phone }} </th>
-                                </tr>
-
-                                <tr>
-                                    <th> Payment Type :</th>
-                                    <th> {{ $order->payment_method }} </th>
-                                </tr>
-
-                                <tr>
-                                    <th> Transaction ID:</th>
-                                    <th> {{ $order->transaction_id }} </th>
-                                </tr>
-
-                                <tr>
-                                    <th> Invoice :</th>
-                                    <th> {{ $order->invoice_no }} </th>
-                                </tr>
-
-                                <tr>
-                                    <th> Order total:</th>
-                                    <th>{{ $order->amount }} </th>
-                                </tr>
-
-                                <tr>
-                                    <th>Order status:</th>
-                                    <th> {{ $order->status }} </th>
-                                </tr>
-                            </table>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="box box-bordered border-primary">
+                        <div class="box-header with-border">
+                            <h4 class="box-title"><strong>Order</strong> invoice</h4>
                         </div>
+                        <table class="table">
+                            <tr>
+                                <th> Name :</th>
+                                <th> {{ $order->user->name }} </th>
+                            </tr>
+
+                            <tr>
+                                <th> Shipping Phone :</th>
+                                <th> {{ $order->user->phone }} </th>
+                            </tr>
+
+                            <tr>
+                                <th> Payment Type :</th>
+                                <th> {{ $order->payment_method }} </th>
+                            </tr>
+
+                            <tr>
+                                <th> Transaction ID:</th>
+                                <th> {{ $order->transaction_id }} </th>
+                            </tr>
+
+                            <tr>
+                                <th> Invoice :</th>
+                                <th class="text-danger"> {{ $order->invoice_no }} </th>
+                            </tr>
+
+                            <tr>
+                                <th> Order total:</th>
+                                <th>{{ $order->amount }} </th>
+                            </tr>
+
+                            <tr>
+                                <th>Order status:</th>
+                                <th> {{ $order->status }} </th>
+                            </tr>
+                        </table>
                     </div>
-                </div> <!-- // end col md -5 -->
-                <div class="row">
-                    <div class="col-md-12">
+                </div>
+
+                <div class="col-md-12 col-12">
+                    <div class="box box-bordered border-primary">
+                        <div class="box-header with-border">
+                            <h4 class="box-title"><strong>Bordered</strong> box</h4>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
-                                <tr style="background: #e2e2e2;">
+                                <tr>
                                     <td class="col-md-1">
                                         <label for=""> Image</label>
                                     </td>
@@ -170,18 +190,12 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div> <!-- / end col md 8 -->
-                </div>
-                @if($order->status !== 'delivered')
-                @else
-                    <div class="form-group">
-                        <label>Order return reason: </label>
-                        <textarea name="" id="" class="form-control" cols="30" rows="05">
-                    Return reason
-                </textarea>
                     </div>
-                @endif
+                </div>
             </div>
-        </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+
     </div>
 @endsection

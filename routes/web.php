@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminOrderController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
@@ -221,3 +222,18 @@ Route::get('/checkout', [CartController::class, 'checkoutCreate'])->name('checko
 Route::get('/district-get/ajax/{province_id}', [CheckoutController::class, 'getDistrictsAjax']);
 Route::get('/ward-get/ajax/{district_id}', [CheckoutController::class, 'getWardsAjax']);
 Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
+
+// Admin Orders All Routes
+Route::prefix('orders')->group(function () {
+    Route::get('/pending/orders', [AdminOrderController::class, 'pendingOrders'])->name('pending-orders');
+    Route::get('/pending/order/details/{order_id}', [AdminOrderController::class, 'pendingOrderDetails'])->name('pending.order.details');
+    Route::get('/confirmed/orders', [AdminOrderController::class, 'confirmedOrders'])->name('confirmed-orders');
+    Route::get('/processing/orders', [AdminOrderController::class, 'processingOrders'])->name('processing-orders');
+    Route::get('/picked/orders', [AdminOrderController::class, 'pickedOrders'])->name('picked-orders');
+    Route::get('/shipped/orders', [AdminOrderController::class, 'shippedOrders'])->name('shipped-orders');
+    Route::get('/delivered/orders', [AdminOrderController::class, 'deliveredOrders'])->name('delivered-orders');
+    Route::get('/cancel/orders', [AdminOrderController::class, 'cancelOrders'])->name('cancel-orders');
+//    Route::get('/edit/{id}', [CouponController::class, 'couponEdit'])->name('coupon.edit');
+//    Route::post('/update', [CouponController::class, 'couponUpdate'])->name('coupon.update');
+//    Route::get('/delete/{id}', [CouponController::class, 'couponDelete'])->name('coupon.delete');
+});
