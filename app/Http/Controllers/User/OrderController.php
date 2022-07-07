@@ -22,7 +22,7 @@ class OrderController extends Controller
         } else {
             $totalAmount = Cart::total();
         }
- 
+
         $orderId = Order::insertGetId([
             'user_id' => Auth::id(),
             'province_id' => $request->province_id,
@@ -39,7 +39,7 @@ class OrderController extends Controller
             'payment_type' => 'COD',
             'transaction_id' => 'demo',
             'currency' => 'VND',
-            'amount' => (int) $totalAmount,
+            'amount' => (int)$totalAmount,
             'order_number' => 'EOS' . mt_rand(10000000, 99999999),
 
             'invoice_no' => 'EOS' . mt_rand(10000000, 99999999),
@@ -75,5 +75,18 @@ class OrderController extends Controller
         );
 
         return redirect()->route('dashboard')->with($notification);
+    }
+
+    public function myOrders()
+    {
+        $orders = Order::where(['user_id' => Auth::id()])->orderBy('id', 'DESC')->get();
+        return view('frontend.user.order.order_view', compact('orders'));
+    }
+
+    public function orderDetails($orderId)
+    {
+        $order = Order::with('province', 'district', 'ward', 'user')->where(['id' => $orderId, 'user_id' => Auth::id()])->first();
+        $orderItem = OrderItem::with('product')->where(['order_id' => $orderId])->orderBy('id', 'DESC')->get();
+        return view('frontend.user.order.order_view_details', compact('order', 'orderItem'));
     }
 }

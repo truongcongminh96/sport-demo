@@ -166,6 +166,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
     Route::post('/stripe/order', [OrderController::class, 'stripeOrder'])->name('stripe.order');
+    Route::get('/my/orders', [OrderController::class, 'myOrders'])->name('my.orders');
+    Route::get('/order_details/{order_id}', [OrderController::class, 'orderDetails']);
 });
 
 Route::get('/mycart', [CartPageController::class, 'myCart'])->name('mycart');
