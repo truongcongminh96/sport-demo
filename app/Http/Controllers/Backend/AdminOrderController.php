@@ -85,4 +85,32 @@ class AdminOrderController extends Controller
 
         return redirect()->route('confirmed-orders')->with($notification);
     }
+
+    public function processingToPicked($orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'status' => 'Picked'
+        ]);
+
+        $notification = array(
+            'message' => 'Order Picked Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('processing-orders')->with($notification);
+    }
+
+    public function pickedToShipped($orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'status' => 'Shipped'
+        ]);
+
+        $notification = array(
+            'message' => 'Order Shipped Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('picked-orders')->with($notification);
+    }
 }

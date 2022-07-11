@@ -120,6 +120,10 @@
                                         <a href="{{ route('pending-confirm', $order->id) }}" class="btn btn-block btn-success" id="confirm">Confirm Order</a>
                                     @elseif($order->status == 'Confirmed')
                                         <a href="{{ route('confirm.processing', $order->id) }}" class="btn btn-block btn-success" id="processing">Processing Order</a>
+                                    @elseif($order->status == 'Processing')
+                                        <a href="{{ route('processing.picked', $order->id) }}" class="btn btn-block btn-success" id="picked">Picked Order</a>
+                                    @elseif($order->status == 'Picked')
+                                        <a href="{{ route('picked.shipped', $order->id) }}" class="btn btn-block btn-success" id="shipped">Shipped Order</a>
                                     @endif
                                 </th>
                             </tr>
