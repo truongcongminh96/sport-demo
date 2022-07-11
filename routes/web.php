@@ -233,6 +233,8 @@ Route::prefix('orders')->group(function () {
     Route::get('/shipped/orders', [AdminOrderController::class, 'shippedOrders'])->name('shipped-orders');
     Route::get('/delivered/orders', [AdminOrderController::class, 'deliveredOrders'])->name('delivered-orders');
     Route::get('/cancel/orders', [AdminOrderController::class, 'cancelOrders'])->name('cancel-orders');
+    Route::get('/pending/confirm/{order_id}', [AdminOrderController::class, 'pendingToConfirm'])->name('pending-confirm');
+    Route::get('/confirm/processing/{order_id}', [AdminOrderController::class, 'confirmToProcessing'])->name('confirm.processing');
 //    Route::get('/edit/{id}', [CouponController::class, 'couponEdit'])->name('coupon.edit');
 //    Route::post('/update', [CouponController::class, 'couponUpdate'])->name('coupon.update');
 //    Route::get('/delete/{id}', [CouponController::class, 'couponDelete'])->name('coupon.delete');

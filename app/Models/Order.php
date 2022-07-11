@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static where(array $array)
+ * @method static findOrFail($orderId)
  */
 class Order extends Model
 {

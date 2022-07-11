@@ -57,4 +57,32 @@ class AdminOrderController extends Controller
         $orders = Order::where(['status' => 'Cancel'])->orderBy('id', 'DESC')->get();
         return view('backend.orders.cancel_orders', compact('orders'));
     }
+
+    public function pendingToConfirm($orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'status' => 'Confirmed'
+        ]);
+
+        $notification = array(
+            'message' => 'Order Confirm Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('pending-orders')->with($notification);
+    }
+
+    public function confirmToProcessing($orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'status' => 'Processing'
+        ]);
+
+        $notification = array(
+            'message' => 'Order Processing Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('confirmed-orders')->with($notification);
+    }
 }
