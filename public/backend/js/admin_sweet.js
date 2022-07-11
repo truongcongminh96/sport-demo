@@ -131,3 +131,30 @@ $(function () {
         });
     });
 });
+
+//Delivered
+$(function () {
+    $(document).on('click', '#delivered', function (e) {
+        e.preventDefault();
+        var link = $(this).attr("href");
+
+        Swal.fire({
+            title: 'Are you sure to Delivered?',
+            text: 'Status will note be able to processing again',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delivered!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = link;
+                Swal.fire(
+                    'Delivered!',
+                    'Delivered changes.',
+                    'Success'
+                );
+            }
+        });
+    });
+});

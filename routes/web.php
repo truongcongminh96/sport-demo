@@ -237,6 +237,8 @@ Route::prefix('orders')->group(function () {
     Route::get('/confirm/processing/{order_id}', [AdminOrderController::class, 'confirmToProcessing'])->name('confirm.processing');
     Route::get('/processing/picked/{order_id}', [AdminOrderController::class, 'processingToPicked'])->name('processing.picked');
     Route::get('/picked/shipped/{order_id}', [AdminOrderController::class, 'pickedToShipped'])->name('picked.shipped');
+    Route::get('/shipped/delivered/{order_id}', [AdminOrderController::class, 'shippedToDelivered'])->name('shipped.delivered');
+    Route::get('/invoice/download/{order_id}', [AdminOrderController::class, 'adminInvoiceDownload'])->name('invoice.download');
 //    Route::get('/edit/{id}', [CouponController::class, 'couponEdit'])->name('coupon.edit');
 //    Route::post('/update', [CouponController::class, 'couponUpdate'])->name('coupon.update');
 //    Route::get('/delete/{id}', [CouponController::class, 'couponDelete'])->name('coupon.delete');
