@@ -172,15 +172,27 @@
                         </div>
                     </div> <!-- / end col md 8 -->
                 </div>
-                @if($order->status !== 'delivered')
+                @if($order->status !== 'Delivered')
                 @else
-                    <div class="form-group">
-                        <label>Order return reason: </label>
-                        <textarea name="" id="" class="form-control" cols="30" rows="05">
-                    Return reason
-                </textarea>
-                    </div>
+                    @php
+                        $order = App\Models\Order::where(['id' => $order->id])->whereNull('return_date')->first();
+                    @endphp
+                    @if($order)
+                        <form action="{{ route('return.order', $order->id) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label>Order return reason: </label>
+                                <textarea name="return_reason" id="" class="form-control" cols="30" rows="05">
+                                    Return reason
+                                </textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger">submit</button>
+                        </form>
+                    @else
+                        <span class="badge badge-pill badge-warning" style="background: red">You send request</span>
+                    @endif
                 @endif
+                <br>
             </div>
         </div>
     </div>

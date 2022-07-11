@@ -102,4 +102,31 @@ class OrderController extends Controller
         ]);
         return $pdf->download('invoice.pdf');
     }
+
+    public function returnOrder(Request $request, $orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'return_date' => Carbon::now()->format('d F Y'),
+            'return_reason' => $request->return_reason
+        ]);
+
+        $notification = array(
+            'message' => 'Success return',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('my.orders')->with($notification);
+    }
+
+    public function returnOrderList()
+    {
+        $orders = Order::where(['user_id' => Auth::id()])->whereNotNull('return_date')->orderBy('id', 'DESC')->get();
+        return view('frontend.user.order.return_order_view', compact('orders'));
+    }
+
+    public function cancelOrderList()
+    {
+        $orders = Order::where(['user_id' => Auth::id(), 'status' => 'Cancel'])->orderBy('id', 'DESC')->get();
+        return view('frontend.user.order.cancel_order_view', compact('orders'));
+    }
 }
