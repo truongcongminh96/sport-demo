@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static where(array $array)
  * @method static findOrFail($orderId)
+ * @method static whereBetween(string $string, array $array)
  */
 class Order extends Model
 {

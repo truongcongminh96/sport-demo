@@ -132,6 +132,19 @@
                 </ul>
             </li>
 
+            <li class="treeview {{ ($prefix == '/report') ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="grid"></i>
+                    <span>Report Orders</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'all-reports') ? 'active' : '' }}"><a href="{{ route('all-reports') }}"><i class="ti-more"></i>All reports</a></li>
+                </ul>
+            </li>
+
         </ul>
     </section>
 
