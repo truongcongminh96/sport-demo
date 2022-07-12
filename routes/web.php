@@ -252,3 +252,8 @@ Route::prefix('reports')->group(function () {
     Route::post('/search/by/month', [ReportController::class, 'reportByMonth'])->name('search-by-month');
     Route::post('/search/by/year', [ReportController::class, 'reportByYear'])->name('search-by-year');
 });
+
+// Admin Report Users All Routes
+Route::prefix('all-users')->group(function () {
+    Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all-users');
+});
