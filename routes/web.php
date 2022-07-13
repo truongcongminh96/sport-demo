@@ -265,3 +265,6 @@ Route::prefix('setting')->group(function () {
     Route::get('/seo', [SiteSettingController::class, 'seoSetting'])->name('seo.setting');
     Route::post('/seo/update', [SiteSettingController::class, 'seoSettingUpdate'])->name('update.seo.setting');
 });
+
+//Search
+Route::post('/search', [IndexController::class, 'productSearch'])->name('product.search');

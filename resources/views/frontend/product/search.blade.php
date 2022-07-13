@@ -1,7 +1,7 @@
 @extends('frontend.main_master')
 @section('content')
 @section('title')
-    Sub Category Wise Product
+   Product search
 @endsection
 
 <div class="breadcrumb">
@@ -9,14 +9,7 @@
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="#">Home</a></li>
-
-                @foreach($breadSubCategories as $item)
-                    <li class='active'>{{ $item->category->category_name_en }}</li>
-                @endforeach
-
-                @foreach($breadSubCategories as $item)
-                    <li class='active'>{{ $item->subcategory_name_en }}</li>
-                @endforeach
+                <li class='active'>Handbags</li>
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -408,7 +401,7 @@
                         <div class="text-right">
                             <div class="pagination-container">
                                 <ul class="list-inline list-unstyled">
-                                    {{ $products->links() }}
+
                                 </ul>
                                 <!-- /.list-inline -->
                             </div>

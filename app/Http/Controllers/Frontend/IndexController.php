@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\MultiImage;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -171,8 +173,9 @@ class IndexController extends Controller
             ->paginate(3);
 
         $categories = Category::orderBy('id', 'ASC')->get();
+        $breadSubCategories = SubCategory::with('category')->where(['id' => $subCategoryId])->get();
 
-        return view('frontend.product.subcategory_view', compact('products', 'categories'));
+        return view('frontend.product.subcategory_view', compact('products', 'categories', 'breadSubCategories'));
     }
 
     public function subSubCategoryWiseProduct($subSubCategoryId, $slug)
@@ -206,5 +209,12 @@ class IndexController extends Controller
             'color' => $productColorEn,
             'size' => $productSizeEn
         ));
+    }
+
+    public function productSearch(Request $request)
+    {
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        $products = Product::where('product_name_en', 'LIKE', "%$request->search%")->get();
+        return view('frontend.product.search', compact('products', 'categories'));
     }
 }
