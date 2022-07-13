@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ShippingAreaController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
@@ -256,4 +257,11 @@ Route::prefix('reports')->group(function () {
 // Admin Report Users All Routes
 Route::prefix('all-users')->group(function () {
     Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all-users');
+});
+
+// Admin Site Setting All Routes
+Route::prefix('setting')->group(function () {
+//    Route::get('/site', [SiteSettingController::class, 'siteSetting'])->name('site.setting');
+    Route::get('/seo', [SiteSettingController::class, 'seoSetting'])->name('seo.setting');
+    Route::post('/seo/update', [SiteSettingController::class, 'seoSettingUpdate'])->name('update.seo.setting');
 });
