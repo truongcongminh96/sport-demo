@@ -30,14 +30,17 @@
 
                 <div class="cnt-block">
                     <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+                        <li class="dropdown dropdown-small"><a href="#" class="dropdown-toggle" data-hover="dropdown"
+                                                               data-toggle="dropdown"><span class="value">USD </span><b
+                                    class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">USD</a></li>
                                 <li><a href="#">INR</a></li>
                                 <li><a href="#">GBP</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">
+                        <li class="dropdown dropdown-small"><a href="#" class="dropdown-toggle" data-hover="dropdown"
+                                                               data-toggle="dropdown"><span class="value">
                                     @if(session()->get('language') == 'vietnam')
                                         Tiếng Việt
                                     @else
@@ -46,9 +49,9 @@
                                 </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 @if(session()->get('language') == 'vietnam')
-                                <li><a href="{{ route('english.language') }}">English</a></li>
+                                    <li><a href="{{ route('english.language') }}">English</a></li>
                                 @else
-                                <li><a href="{{ route('vietnam.language') }}">Việt Nam</a></li>
+                                    <li><a href="{{ route('vietnam.language') }}">Việt Nam</a></li>
                                 @endif
                             </ul>
                         </li>
@@ -69,9 +72,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo"> </a> </div>
+                    <div class="logo"><a href="{{ url('/') }}"> <img
+                                src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo"> </a></div>
                     <!-- /.logo -->
-                    <!-- ============================================================= LOGO : END ============================================================= --> </div>
+                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </div>
                 <!-- /.logo-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
@@ -82,30 +87,39 @@
                             @csrf
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
-                                    <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
-                                        <ul class="dropdown-menu" role="menu" >
+                                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"
+                                                            href="category.html">Categories <b class="caret"></b></a>
+                                        <ul class="dropdown-menu" role="menu">
                                             <li class="menu-header">Computer</li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Clothing</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Electronics</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Shoes</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Watches</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                       href="category.html">- Clothing</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                       href="category.html">- Electronics</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                       href="category.html">- Shoes</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                                       href="category.html">- Watches</a></li>
                                         </ul>
                                     </li>
                                 </ul>
-                                <input class="search-field" name="search" placeholder="Search here..." />
-                                <a class="search-button" href="#" ></a> </div>
+                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()" id="search" name="search" placeholder="Search here..."/>
+                                <button class="search-button" type="submit"></button>
+                            </div>
                         </form>
+                        <div id="searchProductsAdvanced"></div>
                     </div>
                     <!-- /.search-area -->
-                    <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
+                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+                </div>
                 <!-- /.top-search-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
-                    <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+                    <div class="dropdown dropdown-cart"><a href="#" class="dropdown-toggle lnk-cart"
+                                                           data-toggle="dropdown">
                             <div class="items-cart-inner">
-                                <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
+                                <div class="basket"><i class="glyphicon glyphicon-shopping-cart"></i></div>
                                 <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
                                 <div class="total-price-basket">
                                     <span class="lbl">cart -</span>
@@ -124,9 +138,12 @@
                                 </div>
                                 <!-- End Mini Cart -->
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price' id="cartSubTotal"></span> </div>
+                                    <div class="pull-right"><span class="text">Sub Total :</span><span class='price'
+                                                                                                       id="cartSubTotal"></span>
+                                    </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
+                                    <a href="checkout.html"
+                                       class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a></div>
                                 <!-- /.cart-total-->
 
                             </li>
@@ -135,7 +152,8 @@
                     </div>
                     <!-- /.dropdown-cart -->
 
-                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= --> </div>
+                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                </div>
                 <!-- /.top-cart-row -->
             </div>
             <!-- /.row -->
@@ -151,25 +169,30 @@
         <div class="container">
             <div class="yamm navbar navbar-default" role="navigation">
                 <div class="navbar-header">
-                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"
+                            class="navbar-toggle collapsed" type="button">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span></button>
                 </div>
                 <div class="nav-bg-class">
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-                                    <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle"
+                                       data-toggle="dropdown">
                                         @if(session()->get('language') == 'vietnam')Trang chủ @else Home @endif
                                     </a>
                                 </li>
 
                                 @php
-                                $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
+                                    $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
                                 @endphp
 
                                 @foreach($categories as $category)
-                                    <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"> @if(session()->get('language') == 'vietnam'){{ $category->category_name_vn }} @else {{ $category->category_name_en }} @endif</a>
+                                    <li class="dropdown yamm mega-menu"><a href="home.html" data-hover="dropdown"
+                                                                           class="dropdown-toggle"
+                                                                           data-toggle="dropdown"> @if(session()->get('language') == 'vietnam'){{ $category->category_name_vn }} @else {{ $category->category_name_en }} @endif</a>
                                         <ul class="dropdown-menu container">
                                             <li>
                                                 <div class="yamm-content ">
@@ -204,7 +227,10 @@
                                                             <!-- /.col -->
                                                         @endforeach
 
-                                                        <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image"> <img class="img-responsive" src="{{ asset('frontend/assets/images/banners/top-menu-banner.jpg') }}" alt=""> </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image">
+                                                            <img class="img-responsive"
+                                                                 src="{{ asset('frontend/assets/images/banners/top-menu-banner.jpg') }}"
+                                                                 alt=""></div>
                                                         <!-- /.yamm-content -->
                                                     </div>
                                                 </div>
@@ -213,7 +239,7 @@
                                     </li>
                                 @endforeach
 
-                                <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                                <li class="dropdown  navbar-right special-menu"><a href="#">Todays offer</a></li>
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>
@@ -234,3 +260,26 @@
     <!-- ============================================== NAVBAR : END ============================================== -->
 
 </header>
+<style>
+    .search-area {
+        position: relative;
+    }
+
+    #searchProductsAdvanced {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        background: #FFFFFF;
+        z-index: 999;
+        border-radius: 8px;
+    }
+</style>
+<script>
+    function search_result_hide(){
+        $("#searchProductsAdvanced").slideUp();
+    }
+    function search_result_show(){
+        $("#searchProductsAdvanced").slideDown();
+    }
+</script>

@@ -165,15 +165,21 @@ class IndexController extends Controller
         return view('frontend.tags.tags_view', compact('products', 'categories'));
     }
 
-    public function subCategoryWiseProduct($subCategoryId, $slug)
+    public function subCategoryWiseProduct(Request $request, $subCategoryId, $slug)
     {
         $products = Product::where('status', 1)
             ->where('subcategory_id', $subCategoryId)
             ->orderBy('id', 'DESC')
-            ->paginate(3);
+            ->paginate(1);
 
         $categories = Category::orderBy('id', 'ASC')->get();
         $breadSubCategories = SubCategory::with('category')->where(['id' => $subCategoryId])->get();
+
+        if ($request->ajax()) {
+            $girdView = view('frontend.product.grid_view_product', compact('products'))->render();
+            $listView = view('frontend.product.list_view_product', compact('products'))->render();
+            return response()->json(['grid_view' => $girdView, 'list_view' => $listView]);
+        }
 
         return view('frontend.product.subcategory_view', compact('products', 'categories', 'breadSubCategories'));
     }
@@ -213,8 +219,21 @@ class IndexController extends Controller
 
     public function productSearch(Request $request)
     {
+        $request->validate([
+            'search' => 'required'
+        ]);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
         $products = Product::where('product_name_en', 'LIKE', "%$request->search%")->get();
         return view('frontend.product.search', compact('products', 'categories'));
+    }
+
+    public function productSearchAdvanced(Request $request)
+    {
+        $request->validate([
+            'search' => 'required'
+        ]);
+
+        $products = Product::where('product_name_en', 'LIKE', "%$request->search%")->select('product_name_en', 'product_thumbnail', 'selling_price', 'id', 'product_slug_en')->get();
+        return view('frontend.product.search_advanced', compact('products'));
     }
 }

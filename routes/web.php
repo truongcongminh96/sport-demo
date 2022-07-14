@@ -268,3 +268,4 @@ Route::prefix('setting')->group(function () {
 
 //Search
 Route::post('/search', [IndexController::class, 'productSearch'])->name('product.search');
+Route::post('/search-product', [IndexController::class, 'productSearchAdvanced']);
