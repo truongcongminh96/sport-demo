@@ -102,7 +102,8 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()" id="search" name="search" placeholder="Search here..."/>
+                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()"
+                                       id="search" name="search" placeholder="Search here..."/>
                                 <button class="search-button" type="submit"></button>
                             </div>
                         </form>
@@ -238,7 +239,7 @@
                                         </ul>
                                     </li>
                                 @endforeach
-
+                                <li><a href="{{ route('shop.page') }}">Shop</a></li>
                                 <li class="dropdown  navbar-right special-menu"><a href="#">Todays offer</a></li>
                             </ul>
                             <!-- /.navbar-nav -->
@@ -276,10 +277,11 @@
     }
 </style>
 <script>
-    function search_result_hide(){
+    function search_result_hide() {
         $("#searchProductsAdvanced").slideUp();
     }
-    function search_result_show(){
+
+    function search_result_show() {
         $("#searchProductsAdvanced").slideDown();
     }
 </script>

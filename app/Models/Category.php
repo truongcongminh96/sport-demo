@@ -5,13 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @method static latest()
- * @method static insert(array $array)
- * @method static findOrFail($id)
- * @method static orderBy()
- * @method static skip(int $int)
- */
 class Category extends Model
 {
     use HasFactory;

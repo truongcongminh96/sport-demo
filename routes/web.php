@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
@@ -269,3 +270,6 @@ Route::prefix('setting')->group(function () {
 //Search
 Route::post('/search', [IndexController::class, 'productSearch'])->name('product.search');
 Route::post('/search-product', [IndexController::class, 'productSearchAdvanced']);
+
+// Shop Page
+Route::get('/shop', [ShopController::class, 'shopPage'])->name('shop.page');
