@@ -13,16 +13,22 @@ class ShopController extends Controller
     public function shopPage()
     {
         $products = Product::query();
-
-        if (!empty($_GET['category'])) {
+        if (!empty($_GET['category']) && empty($_GET['brand'])) {
             $slugs = explode(',', $_GET['category']);
             $catIds = Category::select('id')->whereIn('category_slug_en', $slugs)->pluck('id')->toArray();
             $products = $products->whereIn('category_id', $catIds)->paginate(3);
-        }
-        if (!empty($_GET['brand'])) {
+        } else if (!empty($_GET['brand']) && empty($_GET['category'])) {
             $slugs = explode(',', $_GET['brand']);
             $brandIds = Brand::select('id')->whereIn('brand_slug_en', $slugs)->pluck('id')->toArray();
             $products = $products->whereIn('brand_id', $brandIds)->paginate(3);
+        } else if (!empty($_GET['category']) && !empty($_GET['brand'])) {
+            $slugsCategory = explode(',', $_GET['category']);
+            $slugsBrand = explode(',', $_GET['brand']);
+
+            $catIds = Category::select('id')->whereIn('category_slug_en', $slugsCategory)->pluck('id')->toArray();
+            $brandIds = Brand::select('id')->whereIn('brand_slug_en', $slugsBrand)->pluck('id')->toArray();
+
+            $products = $products->whereIn('category_id', $catIds)->whereIn('brand_id', $brandIds)->paginate(3);
         } else {
             $products = Product::where('status', 1)->orderBy('id', 'DESC')->paginate(3);
         }
