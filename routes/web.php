@@ -273,3 +273,4 @@ Route::post('/search-product', [IndexController::class, 'productSearchAdvanced']
 
 // Shop Page
 Route::get('/shop', [ShopController::class, 'shopPage'])->name('shop.page');
+Route::post('/shop/filter', [ShopController::class, 'shopFilter'])->name('shop.filter');
