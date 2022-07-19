@@ -91,7 +91,7 @@
                                                 <div class="form-group">
                                                     <h5>Sub->SubCategory Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="subsubcategory_id" class="form-control" required="">
+                                                        <select name="subsubcategory_id" class="form-control">
                                                             <option value="" selected="" disabled="">Select
                                                                 Sub->SubCategory
                                                             </option>
